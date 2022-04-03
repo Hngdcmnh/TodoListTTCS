@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@color/transparent"
+    >
+    <CheckBox
+        android:id="@+id/cb_item_deleted"
+        style="@style/check_box"
+        android:layout_marginStart="@dimen/margin_check_box"
+        android:layout_marginTop="@dimen/margin_check_box"
+        android:layout_marginEnd="@dimen/margin_check_box"
+        android:layout_marginBottom="@dimen/margin_check_box" />
+
+    <TextView
+        android:id="@+id/tv_title_item_deleted"
+        style="@style/text_view"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/cb_item_deleted"
+        android:layout_marginTop="@dimen/margin_text_view_large"
+        />
+
+    <TextView
+        android:id="@+id/tv_deadline_item_deleted"
+        style="@style/text_view"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/cb_item_deleted"
+        android:layout_marginBottom="@dimen/margin_text_view_large"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_thungrac"
+        />
+
+</RelativeLayout>

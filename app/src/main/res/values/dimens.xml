@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_check_box">8dp</dimen>
+    <dimen name="margin_text_view">8dp</dimen>
+    <dimen name="margin_text_view_large">16dp</dimen>
+
+
+
+</resources>
