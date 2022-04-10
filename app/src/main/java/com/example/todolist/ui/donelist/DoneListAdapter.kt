@@ -1,23 +1,23 @@
-package com.example.todolist.ui.tasklist
+package com.example.todolist.ui.donelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.BaseAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todolist.base.BaseAdapter
 import com.example.todolist.databinding.ItemTaskBinding
 import com.example.todolist.model.Task
+import com.example.todolist.ui.donelist.DoneListAdapter.*
 
-class TaskListAdapter(): BaseAdapter<Task, TaskListAdapter.ViewHolder>() {
+class DoneListAdapter:com.example.todolist.base.BaseAdapter<Task, DoneListAdapter.ViewHolder>()  {
 
-    class ViewHolder(private val binding: ItemTaskBinding):RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(task: Task) {
             binding.task = task
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemTaskBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent,false)
         return ViewHolder(binding)
     }
 
@@ -26,5 +26,4 @@ class TaskListAdapter(): BaseAdapter<Task, TaskListAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int = listData.size
-
 }

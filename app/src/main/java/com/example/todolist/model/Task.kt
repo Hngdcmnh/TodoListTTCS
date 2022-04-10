@@ -6,5 +6,6 @@ data class Task (
     var id: Int,
     var title:String,
     var description:String,
-    var deadline:Date
+    var deadline:Date,
+    var status:TaskStatus
     )

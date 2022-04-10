@@ -10,16 +10,18 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/transparent"
+        android:background="@color/white"
         >
 
         <CheckBox
             android:id="@+id/cb_item_task"
             style="@style/check_box"
-            android:layout_marginStart="@dimen/margin_check_box"
-            android:layout_marginTop="@dimen/margin_check_box"
-            android:layout_marginEnd="@dimen/margin_check_box"
-            android:layout_marginBottom="@dimen/margin_check_box" />
+            android:layout_marginStart="@dimen/tiny"
+            android:layout_marginTop="@dimen/tiny"
+            android:layout_marginEnd="@dimen/tiny"
+            android:layout_marginBottom="@dimen/tiny"
+            android:checked='@{task.status.name().equals("DONE") ? true: false}'
+            />
 
         <TextView
             android:id="@+id/tv_title_item_task"
@@ -27,7 +29,8 @@
             android:text="@{task.title}"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@id/cb_item_task"
-            android:layout_marginTop="@dimen/margin_text_view_large"
+            android:layout_marginTop="@dimen/tiny"
+            android:textColor="@color/black"
             />
 
         <TextView
@@ -36,8 +39,9 @@
             android:text="@{task.deadline.toString()}"
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/cb_item_task"
-            android:layout_marginBottom="@dimen/margin_text_view_large"
+            android:layout_marginBottom="@dimen/tiny"
             />
+
     </RelativeLayout>
 
 </layout>

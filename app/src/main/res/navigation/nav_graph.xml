@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/doneListFragment"
-        android:name="com.example.todolist.ui.DoneListFragment"
+        android:name="com.example.todolist.ui.donelist.DoneListFragment"
         android:label="Done list"
         tools:layout="@layout/fragment_done_list" />
 
