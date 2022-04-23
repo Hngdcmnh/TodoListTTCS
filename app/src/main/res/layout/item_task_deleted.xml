@@ -1,39 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="@color/transparent"
-    >
-    <CheckBox
-        android:id="@+id/cb_item_deleted"
-        style="@style/check_box"
-        android:layout_marginStart="@dimen/margin_check_box"
-        android:layout_marginTop="@dimen/margin_check_box"
-        android:layout_marginEnd="@dimen/margin_check_box"
-        android:layout_marginBottom="@dimen/margin_check_box" />
 
-    <TextView
-        android:id="@+id/tv_title_item_deleted"
-        style="@style/text_view"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@id/cb_item_deleted"
-        android:layout_marginTop="@dimen/margin_text_view_large"
-        />
+<layout>
 
-    <TextView
-        android:id="@+id/tv_deadline_item_deleted"
-        style="@style/text_view"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@id/cb_item_deleted"
-        android:layout_marginBottom="@dimen/margin_text_view_large"
-        />
+    <data>
+        <variable
+            name="task"
+            type="com.example.todolist.model.Task" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_thungrac"
-        />
+        <variable
+            name="taskViewModel"
+            type="com.example.todolist.ui.TaskViewModel" />
+    </data>
 
-</RelativeLayout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/transparent"
+        >
+        <CheckBox
+            android:id="@+id/cb_item_task"
+            style="@style/check_box"
+            android:layout_marginStart="@dimen/tiny"
+            android:layout_marginTop="@dimen/tiny"
+            android:layout_marginEnd="@dimen/tiny"
+            android:layout_marginBottom="@dimen/tiny"
+            android:checked='@{task.status.name().equals("DONE") ? true: false}'
+            android:onClick="@{() -> taskViewModel.onClickCheckBox(task)}"
+            />
+
+        <TextView
+            android:id="@+id/tv_title_item_task"
+            style="@style/text_view"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/tiny"
+            android:layout_toEndOf="@id/cb_item_task"
+            android:text="@{task.title}"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_description_item_task"
+            style="@style/text_view"
+            android:layout_below="@id/tv_title_item_task"
+            android:layout_above="@id/tv_deadline_item_task"
+            android:layout_toEndOf="@id/cb_item_task"
+            android:text="@{task.description}"
+            android:textColor="@color/app" />
+
+        <TextView
+            android:id="@+id/tv_deadline_item_task"
+            style="@style/text_view"
+            android:text="@{task.deadlineForView}"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/cb_item_task"
+            android:layout_marginBottom="@dimen/small"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="@dimen/medium"
+            android:src="@drawable/ic_thungrac"
+            android:onClick="@{() -> taskViewModel.removeInDatabase(task)}"
+            />
+
+    </RelativeLayout>
+</layout>

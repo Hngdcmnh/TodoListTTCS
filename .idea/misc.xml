@@ -8,14 +8,16 @@
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/drawable-v24/ic_ghichu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/drawable-v24/ic_nhan.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/drawable-v24/ic_thungrac.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/drawable/bg_rounded_corner.xml" value="0.30277777777777776" />
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/drawable/header_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/drawable/round_corner.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
-        <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/layout/dialog_add_new_task.xml" value="0.33" />
+        <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/layout/dialog_add_new_task.xml" value="0.25" />
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/layout/fragment_deleted_list.xml" value="0.2859375" />
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/layout/fragment_done_list.xml" value="0.2859375" />
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/layout/fragment_task_list.xml" value="0.2859375" />
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/layout/header_main.xml" value="0.35052083333333334" />
-        <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/layout/item_task.xml" value="0.22" />
+        <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/layout/item_task.xml" value="0.25" />
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/layout/item_task_deleted.xml" value="0.35" />
         <entry key="..\:/Users/hdmin/OneDrive/Desktop/PTIT/TTCS/app/src/main/res/menu/nav_menu.xml" value="1.1" />
       </map>
@@ -30,7 +32,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.33" />
+        <option name="scale" value="0.10404624277456648" />
       </ProjectState>
     </option>
   </component>

@@ -7,7 +7,7 @@
             type="com.example.todolist.ui.TaskViewModel" />
 
         <variable
-            name="adapter"
+            name="doneListAdapter"
             type="com.example.todolist.ui.donelist.DoneListAdapter" />
     </data>
 
@@ -30,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:adapter="@{adapter}"
+            android:adapter="@{doneListAdapter}"
             app:submitList="@{taskViewModel.listDoneTask}"
             />
 

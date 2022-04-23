@@ -4,6 +4,10 @@
         <variable
             name="task"
             type="com.example.todolist.model.Task" />
+
+        <variable
+            name="taskViewModel"
+            type="com.example.todolist.ui.TaskViewModel" />
     </data>
 
     <RelativeLayout
@@ -21,27 +25,38 @@
             android:layout_marginEnd="@dimen/tiny"
             android:layout_marginBottom="@dimen/tiny"
             android:checked='@{task.status.name().equals("DONE") ? true: false}'
+            android:onClick="@{() -> taskViewModel.onClickCheckBox(task)}"
             />
 
         <TextView
             android:id="@+id/tv_title_item_task"
             style="@style/text_view"
-            android:text="@{task.title}"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@id/cb_item_task"
             android:layout_marginTop="@dimen/tiny"
-            android:textColor="@color/black"
-            />
+            android:layout_toEndOf="@id/cb_item_task"
+            android:text="@{task.title}"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_description_item_task"
+            style="@style/text_view"
+            android:layout_below="@id/tv_title_item_task"
+            android:layout_above="@id/tv_deadline_item_task"
+            android:layout_toEndOf="@id/cb_item_task"
+            android:text="@{task.description}"
+            android:textColor="@color/app" />
 
         <TextView
             android:id="@+id/tv_deadline_item_task"
             style="@style/text_view"
-            android:text="@{task.deadline.toString()}"
+            android:text="@{task.deadlineForView}"
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/cb_item_task"
-            android:layout_marginBottom="@dimen/tiny"
+            android:layout_marginBottom="@dimen/small"
             />
 
     </RelativeLayout>
+
+
 
 </layout>

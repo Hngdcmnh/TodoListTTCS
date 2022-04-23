@@ -2,9 +2,14 @@ package com.example.todolist.utils
 
 import androidx.lifecycle.Observer
 
-open class Event<out T>(private val content: T) {
+open class Event<T>(private var content: T) {
     var hasBeenHandled = false
         private set
+
+    fun setContent(content: T)
+    {
+        this.content = content
+    }
 
     fun getContentIfNotHandled(): T? {
         return if (hasBeenHandled) {
