@@ -4,13 +4,21 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.todolist.data.TaskRepository
 import com.example.todolist.model.Task
 import com.example.todolist.model.TaskStatus
+import com.example.todolist.utils.dateToString
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 import java.util.*
 
-class TaskViewModel:ViewModel() {
-    private var _listTask = MutableLiveData<MutableList<Task>>()
+class TaskViewModel(private var taskRepository: TaskRepository):ViewModel() {
+    private var _listTask = taskRepository.getAllTask as LiveData<MutableList<Task>>
     val listTask: LiveData<MutableList<Task>>
         get() = _listTask
 
@@ -32,12 +40,6 @@ class TaskViewModel:ViewModel() {
 
     init {
         _openAddTaskDialog.value = false
-        val tasks = mutableListOf<Task>()
-        for (i in 1..10) {
-            val cal = Calendar.getInstance().time
-            tasks.add(Task(i, "task $i", "description $i", cal, TaskStatus.PENDING))
-        }
-        _listTask.value = tasks
         updateListDoneTask()
     }
 
@@ -47,9 +49,9 @@ class TaskViewModel:ViewModel() {
         val deletedTasks = mutableListOf<Task>()
         _listTask.value?.let {
             for (task in it) {
-                if (task.status == TaskStatus.DONE) {
+                if (task.status == TaskStatus.DONE.toString()) {
                     doneTasks.add(task)
-                } else if (task.status == TaskStatus.PENDING) {
+                } else if (task.status == TaskStatus.PENDING.toString()) {
                     pendingTasks.add(task)
                 }
                 else
@@ -58,28 +60,40 @@ class TaskViewModel:ViewModel() {
                 }
             }
         }
-        _listDeleteTask.value = deletedTasks
-        _listPendingTask.value = pendingTasks
-        _listDoneTask.value = doneTasks
+        _listDeleteTask.postValue(deletedTasks)
+        _listPendingTask.postValue(pendingTasks)
+        _listDoneTask.postValue(doneTasks)
     }
 
     fun addPendingTasks(task: Task)
     {
         _listPendingTask.value?.add(task)
+
+        viewModelScope.launch {
+            taskRepository.addTask(task)
+            _listDeleteTask.postValue(_listPendingTask.value)
+        }
     }
+
 
     fun deletePendingTasks(task: Task)
     {
         _listPendingTask.value?.remove(task)
-        task.status = TaskStatus.DELETED
+        task.status = TaskStatus.DELETED.toString()
         _listDeleteTask.value?.add(task)
+        viewModelScope.launch {
+            taskRepository.updateTask(task)
+        }
     }
 
     fun deleteDoneTasks(task: Task)
     {
         _listDoneTask.value?.remove(task)
-        task.status = TaskStatus.DELETED
+        task.status = TaskStatus.DELETED.toString()
         _listDeleteTask.value?.add(task)
+        viewModelScope.launch {
+            taskRepository.updateTask(task)
+        }
     }
 
     fun eventAddNewTask(){
@@ -93,7 +107,10 @@ class TaskViewModel:ViewModel() {
         val removeTask = _listDeleteTask.value?.find{ itemTask -> itemTask == task }
         _listDeleteTask.value?.remove(removeTask)
         _listDeleteTask.postValue(_listDeleteTask.value)
-        var i=0
+
+        viewModelScope.launch {
+            taskRepository.deleteTask(task.id)
+        }
     }
 
     fun dismissAddNewTaskDialog()
@@ -107,11 +124,11 @@ class TaskViewModel:ViewModel() {
     fun onClickCheckBox(taskClick: Task) {
 
         val taskPending = _listPendingTask.value?.find { task -> taskClick.title == task.title }
-        taskPending?.status = TaskStatus.DONE
+        taskPending?.status = TaskStatus.DONE.toString()
         Log.e(this.javaClass.simpleName,taskPending?.title.toString())
 
         val taskDone = _listDoneTask.value?.find { task -> taskClick.title == task.title }
-        taskDone?.status = TaskStatus.PENDING
+        taskDone?.status = TaskStatus.PENDING.toString()
 
         if (taskPending != null) {
             _listDoneTask.value?.add(taskPending)
@@ -120,6 +137,10 @@ class TaskViewModel:ViewModel() {
             _listPendingTask.value?.remove(taskPending)
 
             _listPendingTask.postValue(_listPendingTask.value)
+
+            viewModelScope.launch {
+                taskRepository.updateTask(taskPending);
+            }
         }
 
         if(taskDone != null)
@@ -129,6 +150,10 @@ class TaskViewModel:ViewModel() {
 
             _listDoneTask.value?.remove(taskDone)
             _listDoneTask.postValue(_listDoneTask.value)
+
+            viewModelScope.launch {
+                taskRepository.updateTask(taskDone);
+            }
         }
     }
 }

@@ -1,20 +1,30 @@
 package com.example.todolist.data
 
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 import com.example.todolist.model.Task
 import com.example.todolist.model.TaskStatus
+import com.example.todolist.utils.dateToString
 import java.util.*
 
-class TaskDao {
-    fun getAllTask():MutableList<Task>
-    {
-        val list = mutableListOf<Task>()
-        for(i in 1..10)
-        {
-            val cal = Calendar.getInstance().time
-            list.add(Task(i,"task $i","description $i",cal,TaskStatus.PENDING))
-            list.add(Task(i*10,"task ${i*10}","description $i",cal,TaskStatus.DONE))
-        }
+@Dao
+interface TaskDao {
 
-        return list
-    }
+    @Insert
+    suspend fun insertTask(task:Task)
+
+    @Query("DELETE FROM task_database")
+    suspend fun deleteAll()
+
+    @Query("DELETE FROM task_database WHERE id = :id")
+    suspend fun deleteById(id:Int)
+
+    @Query("SELECT * FROM task_database ORDER BY id ASC")
+    fun getAllTask() : LiveData<List<Task>>
+
+    @Query("UPDATE task_database SET title= :title, description = :description, deadline = :deadline, status = :status  WHERE id = :id")
+    suspend fun updateTask(id:String, title: String, description:String, deadline: String, status: String)
+
 }

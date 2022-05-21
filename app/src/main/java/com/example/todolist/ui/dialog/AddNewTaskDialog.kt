@@ -19,13 +19,12 @@ import java.util.*
 import android.widget.CalendarView
 import android.widget.CalendarView.OnDateChangeListener
 import android.widget.Toast
-
+import com.example.todolist.utils.dateToString
 
 class AddNewTaskDialog:DialogFragment() {
 
     private val taskViewModel: TaskViewModel by activityViewModels()
     private val calendar= Calendar.getInstance()
-
     private val binding: DialogAddNewTaskBinding by lazy {
         getInflater(layoutInflater)
     }
@@ -33,8 +32,8 @@ class AddNewTaskDialog:DialogFragment() {
     val getInflater: (LayoutInflater) -> DialogAddNewTaskBinding
         get() = DialogAddNewTaskBinding::inflate
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog!!.window?.setBackgroundDrawableResource(R.drawable.round_corner);
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        dialog!!.window?.setBackgroundDrawableResource(R.drawable.round_corner)
         return binding.root
     }
 
@@ -51,14 +50,12 @@ class AddNewTaskDialog:DialogFragment() {
         binding.btSave.setOnClickListener {
             if(checkTask())
             {
-                taskViewModel.addPendingTasks(Task(getID(),binding.etTitle.text.toString(),binding.etDescription.text.toString(),calendar.time,TaskStatus.PENDING))
+                taskViewModel.addPendingTasks(Task(getID(),binding.etTitle.text.toString(),binding.etDescription.text.toString(),calendar.time.dateToString("dd/MM/yyyy"),TaskStatus.PENDING.toString()))
                 dialog?.dismiss()
             }
-
         }
 
         binding.tvDeadline.setOnClickListener {
-
             if(binding.calendar.visibility == View.VISIBLE)
             {
                 binding.calendar.visibility=View.GONE
@@ -85,7 +82,6 @@ class AddNewTaskDialog:DialogFragment() {
                 res = res*10+i.digitToInt()
             }
         }
-
         return res
     }
 

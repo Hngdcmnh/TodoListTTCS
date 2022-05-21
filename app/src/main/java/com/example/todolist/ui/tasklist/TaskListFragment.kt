@@ -11,10 +11,15 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.R
+import com.example.todolist.TaskViewModelFactory
+import com.example.todolist.data.TaskDatabase
+import com.example.todolist.data.TaskRepository
 import com.example.todolist.databinding.DialogAddNewTaskBinding
 import com.example.todolist.databinding.FragmentTaskListBinding
 import com.example.todolist.model.Task
@@ -51,6 +56,10 @@ class TaskListFragment : Fragment() {
         binding.taskViewModel = taskViewModel
         adapter = TaskListAdapter(taskViewModel)
         binding.taskListAdapter = adapter
+
+        taskViewModel.listTask.observe(viewLifecycleOwner,{
+            taskViewModel.updateListDoneTask()
+        })
 
         taskViewModel.openAddTaskDialog.observe(viewLifecycleOwner, {
             if (it == true) {

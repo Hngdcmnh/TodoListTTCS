@@ -10,6 +10,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
 import com.example.todolist.R
+import com.example.todolist.TaskViewModelFactory
+import com.example.todolist.data.TaskDatabase
+import com.example.todolist.data.TaskRepository
 //import androidx.navigation.ui.R
 import com.example.todolist.databinding.ActivityMainBinding
 
@@ -37,7 +40,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.navView.setupWithNavController(navController)
 
-        taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
+        val taskRepository = TaskRepository(TaskDatabase.getDatabase(this).taskDao())
+        taskViewModel = ViewModelProvider(this, TaskViewModelFactory(taskRepository)).get(TaskViewModel::class.java)
 
     }
 

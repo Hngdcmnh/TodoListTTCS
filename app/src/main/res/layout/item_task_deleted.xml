@@ -25,7 +25,7 @@
             android:layout_marginTop="@dimen/tiny"
             android:layout_marginEnd="@dimen/tiny"
             android:layout_marginBottom="@dimen/tiny"
-            android:checked='@{task.status.name().equals("DONE") ? true: false}'
+            android:checked='@{task.status.equals("DONE") ? true: false}'
             android:onClick="@{() -> taskViewModel.onClickCheckBox(task)}"
             />
 

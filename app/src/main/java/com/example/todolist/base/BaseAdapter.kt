@@ -9,9 +9,12 @@ import com.example.todolist.model.Task
 abstract class BaseAdapter<T,V:RecyclerView.ViewHolder>:ListAdapter<T,V>(ItemDiffUtil()) {
     var listData: MutableList<T> = mutableListOf()
 
-    open fun updateList(list: MutableList<T>)
+    @SuppressLint("NotifyDataSetChanged")
+    open fun updateList(list: MutableList<T>?)
     {
-        this.listData = list
+        if (list != null) {
+            this.listData = list
+        }
         notifyDataSetChanged()
     }
 
