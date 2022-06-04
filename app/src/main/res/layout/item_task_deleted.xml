@@ -16,7 +16,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/transparent"
+        android:background="@drawable/bg_rounded_corner_white"
+        android:layout_margin="@dimen/xtiny"
         >
         <CheckBox
             android:id="@+id/cb_item_task"
@@ -25,7 +26,7 @@
             android:layout_marginTop="@dimen/tiny"
             android:layout_marginEnd="@dimen/tiny"
             android:layout_marginBottom="@dimen/tiny"
-            android:checked='@{task.status.equals("DONE") ? true: false}'
+            android:checked='@{task.status.equals("DONE_DELETED") ? true: false}'
             android:onClick="@{() -> taskViewModel.onClickCheckBox(task)}"
             />
 
@@ -56,14 +57,26 @@
             android:layout_marginBottom="@dimen/small"
             />
 
+
         <ImageView
+            android:id="@+id/rollBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/remove"
+            android:onClick="@{() -> taskViewModel.rollBack(task)}"
+            android:paddingRight="@dimen/tiny"
+            android:paddingLeft="@dimen/tiny"
+            android:src="@drawable/ic_replay" />
+
+        <ImageView
+            android:id="@+id/remove"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:paddingRight="@dimen/medium"
-            android:src="@drawable/ic_thungrac"
             android:onClick="@{() -> taskViewModel.removeInDatabase(task)}"
-            />
+            android:paddingRight="@dimen/tiny"
+            android:paddingLeft="@dimen/tiny"
+            android:src="@drawable/ic_thungrac" />
 
     </RelativeLayout>
 </layout>

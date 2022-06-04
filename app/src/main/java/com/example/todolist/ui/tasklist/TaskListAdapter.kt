@@ -2,14 +2,11 @@ package com.example.todolist.ui.tasklist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.base.BaseAdapter
 import com.example.todolist.databinding.ItemTaskBinding
 import com.example.todolist.model.Task
 import com.example.todolist.ui.TaskViewModel
-
-import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import java.util.*
 
 

@@ -26,16 +26,13 @@ abstract class TaskDatabase: RoomDatabase() {
                     TaskDatabase::class.java,
                     "task_database"
                 ).build()
-
                 INSTANCE = instance
                 return instance
             }
         }
-
         fun isNull():Boolean
         {
             return (INSTANCE == null)
         }
     }
-
 }

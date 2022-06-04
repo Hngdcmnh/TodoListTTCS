@@ -2,6 +2,8 @@
 
 <layout>
     <data>
+
+        <import type="android.view.View"/>
         <variable
             name="taskViewModel"
             type="com.example.todolist.ui.TaskViewModel" />
@@ -18,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.deleted.DeletedListFragment"
-        android:background="@color/white"
+        android:background="#E6E6E6"
         >
 
         <androidx.recyclerview.widget.RecyclerView
@@ -37,19 +39,34 @@
             app:submitList="@{taskViewModel.listDeleteTask}"
             />
 
-        <ImageView
-            android:id="@+id/imageViewNoData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_background_ghichu"
-            android:tint="@color/app"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-            app:layout_constraintStart_toStartOf="@+id/recyclerView"
-            app:layout_constraintTop_toTopOf="@+id/recyclerView"
-            app:layout_constraintVertical_bias="0.32999998"
-            tools:ignore="UseAppTint" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imageViewNoData"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_background_ghichu"-->
+<!--            android:tint="@color/app"-->
+<!--            android:visibility="@{taskViewModel.listDeleteTask.size()==0 ? View.GONE: View.VISIBLE }"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/recyclerView"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/recyclerView"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/recyclerView"-->
+<!--            app:layout_constraintVertical_bias="0.32999998"-->
+<!--            tools:ignore="UseAppTint" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/textViewNoData"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:alpha="0.5"-->
+<!--            android:text="Deleted task"-->
+<!--            android:textColor="@color/app"-->
+<!--            android:textSize="18sp"-->
+<!--            android:visibility="@{taskViewModel.listDeleteTask.size()==0 ? View.GONE: View.VISIBLE }"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/recyclerView"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/imageViewNoData" />-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

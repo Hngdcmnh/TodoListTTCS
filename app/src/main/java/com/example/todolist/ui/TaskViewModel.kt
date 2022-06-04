@@ -79,7 +79,7 @@ class TaskViewModel(private var taskRepository: TaskRepository):ViewModel() {
     fun deletePendingTasks(task: Task)
     {
         _listPendingTask.value?.remove(task)
-        task.status = TaskStatus.DELETED.toString()
+        task.status = TaskStatus.PENDING_DELETED.toString()
         _listDeleteTask.value?.add(task)
         viewModelScope.launch {
             taskRepository.updateTask(task)
@@ -89,7 +89,7 @@ class TaskViewModel(private var taskRepository: TaskRepository):ViewModel() {
     fun deleteDoneTasks(task: Task)
     {
         _listDoneTask.value?.remove(task)
-        task.status = TaskStatus.DELETED.toString()
+        task.status = TaskStatus.DONE_DELETED.toString()
         _listDeleteTask.value?.add(task)
         viewModelScope.launch {
             taskRepository.updateTask(task)
@@ -111,6 +111,33 @@ class TaskViewModel(private var taskRepository: TaskRepository):ViewModel() {
         viewModelScope.launch {
             taskRepository.deleteTask(task.id)
         }
+    }
+
+    fun rollBack(task: Task){
+        val removeTask = _listDeleteTask.value?.find{ itemTask -> itemTask == task }
+        if(removeTask?.status == TaskStatus.PENDING_DELETED.toString())
+        {
+            _listDeleteTask.value?.remove(removeTask)
+            _listDeleteTask.postValue(_listDeleteTask.value)
+            removeTask.status = TaskStatus.PENDING.toString()
+            _listPendingTask.value?.add(removeTask)
+            _listPendingTask.postValue(_listPendingTask.value)
+        }
+        else if(removeTask?.status == TaskStatus.DONE_DELETED.toString())
+        {
+            _listDeleteTask.value?.remove(removeTask)
+            _listDeleteTask.postValue(_listDeleteTask.value)
+            removeTask.status = TaskStatus.DONE.toString()
+            _listDoneTask.value?.add(removeTask)
+            _listDoneTask.postValue(_listDoneTask.value)
+        }
+
+        viewModelScope.launch {
+            if (removeTask != null) {
+                taskRepository.updateTask(removeTask)
+            };
+        }
+
     }
 
     fun dismissAddNewTaskDialog()

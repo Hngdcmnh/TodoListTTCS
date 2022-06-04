@@ -1,10 +1,10 @@
 package com.example.todolist.ui.deleted
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.base.BaseAdapter
-import com.example.todolist.databinding.ItemTaskBinding
 import com.example.todolist.databinding.ItemTaskDeletedBinding
 import com.example.todolist.model.Task
 import com.example.todolist.ui.TaskViewModel
@@ -16,6 +16,7 @@ class DeletedListAdapter(private val taskViewModel: TaskViewModel):
         fun bind(task: Task) {
             binding.task = task
             binding.taskViewModel = taskViewModel
+            binding.tvTitleItemTask.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG;
         }
     }
 
